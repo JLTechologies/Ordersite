@@ -35,32 +35,41 @@ const createProductList = async (id) => {
 const createProductEl = (product) => {
 
     const children = [
-        createElement("p", product.name, ["lead", "fw-normal", "me-5", "my-0"]),
-        createElement("p", `€${product.price}`, ["lead", "ms-5", "my-0", "fs-6"])]
+        createElement("div", null, ["d-flex", "justify-content-between", "align-items-baseline", "flex-nowrap"], null, [
+            createElement("p", product.name, ["lead", "fw-normal", "me-5", "my-0"]),
+            createElement("div", null, ["d-flex", "justify-content-end", "flex-nowrap", "align-items-baseline"], null, [
+                createElement("p", `€${Number(product.price).toFixed(2)}`, ["lead", "ms-5", "my-0", "fs-6"]),
+                createElement("i", null, ["fas", 'fa-chevron-down', "ms-2", "rotate", "rotate-0"], `chevron-${product.name}`)
+            ])
+        ])
+    ]
     if (product.description)
         children.push(createElement("p", product.description, ["w-100", "m-0", "mt-1", "lead", "text-muted", "fs-6"]))
 
     const liEl = document.createElement("li")
     liEl.classList.add("list-group-item")
     const container = createElement("div", null,
-        ["d-flex", "justify-content-between", "align-items-baseline", "py-3", "flex-wrap"],
+        ["py-3", "flex-nowrap"],
         null,
         children)
-    container.onclick = () => createProductSubEl(product, liEl)
+    container.onclick = () => {
+        createProductSubEl(product, liEl)
+    }
 
     liEl.appendChild(container)
     return liEl
 }
 
-const createProductSubEl = (product, el) => {
-
+const createProductSubEl = async (product, el) => {
+    document.querySelectorAll('[id^=chevron-]').forEach(el => el.classList.replace("rotate-180", "rotate-0"))
 
     if (document.getElementById(`amount-${product.name}`)) {
-        el.removeChild(document.getElementById(`productamount-${product.name}`))
+        fadeOut(document.getElementById(`productamount-${product.name}`), true)
         return
     }
-    const amountList = document.querySelectorAll('[id^=productamount-]')
-    amountList.forEach(el => el.remove())
+    document.querySelectorAll('[id^=productamount-]').forEach(el => fadeOut(el, true))
+
+    document.getElementById(`chevron-${product.name}`).classList.replace("rotate-0", "rotate-180")
 
     const container = createElement("div", null,
         ["container", "px-2", "my-2"],
@@ -69,6 +78,7 @@ const createProductSubEl = (product, el) => {
             createAddToOrderButton(product)
         ])
     el.appendChild(container)
+    fadeIn(container, true)
 }
 
 
@@ -85,7 +95,7 @@ const createAmountField = (product) => {
     const amountEl = createElement("input", null, ["form-control", "mx-3", "w-25", "text-center"],
         `amount-${product.name}`, null,
         [{name: "type", value: "number"}])
-    amountEl.value = order?.products?.find(obj => obj.product.id === product.id)?.amount || 1
+    amountEl.value = 1
     amountContainer.appendChild(amountEl)
 
     const plusButton = createElement("button", null, ["btn", "btn-light", "bg-transparent", "p-1"], null,
@@ -96,30 +106,30 @@ const createAmountField = (product) => {
     return amountContainer
 }
 
-const reduceAmount = (id, productId) => {
+const reduceAmount = (id, productId, updateStorage) => {
     const el = document.getElementById(id)
     const amount = Number(el.value)
     if (amount > 1) {
         el.value = `${amount - 1}`
-        if (order?.products?.find(obj => obj.product.id === productId)) {
+        if (order?.products?.find(obj => obj.product.id === productId) && updateStorage) {
             const orderProduct = order.products.find(obj => obj.product.id === productId)
             orderProduct.amount = amount - 1
             order.products = [...order.products.filter(obj => obj.product.id !== productId), orderProduct]
+            localStorage.setItem("order", JSON.stringify(order))
         }
     }
-    localStorage.setItem("order", JSON.stringify(order))
 }
 
-const increaseAmount = (id, productId) => {
+const increaseAmount = (id, productId, updateStorage) => {
     const el = document.getElementById(id)
     const amount = Number(el.value)
     amount < 1 ? el.value = 1 : el.value = `${amount + 1}`
-    if (order?.products?.find(obj => obj.product.id === productId)) {
+    if (order?.products?.find(obj => obj.product.id === productId) && updateStorage) {
         const orderProduct = order.products.find(obj => obj.product.id === productId)
         amount < 1 ? order.amount = 1 : orderProduct.amount = amount + 1
         order.products = [...order.products.filter(obj => obj.product.id !== productId), orderProduct]
+        localStorage.setItem("order", JSON.stringify(order))
     }
-    localStorage.setItem("order", JSON.stringify(order))
 }
 
 const createAddToOrderButton = (product) => {
@@ -136,8 +146,34 @@ const addProductToOrder = (product) => {
 
     let products = order.products?.filter(obj => obj.product.id !== product.id) || []
 
-    order.products = [...products, {product:{...product}, amount: amount}]
-    console.log(order)
-    localStorage.setItem("order", JSON.stringify(order))
-    updateCart()
+    productAddedBanner(product, amount).then(() => {
+            const productAmount = order?.products?.find(obj => Number(obj.product.id) === Number(product.id))?.amount + amount || amount
+            order.products = [...products, {product: {...product}, amount: productAmount}]
+            localStorage.setItem("order", JSON.stringify(order))
+            updateCart()
+        }
+    )
+}
+
+const productAddedBanner = async (product, amount) => {
+    const container = document.getElementById("productOverview")
+
+
+    const removeButton = createElement("button", null, ["btn-close", "float-end"])
+    const productBanner = createElement("div", null, ["position-fixed", "bottom-0", "my-3", "w-75", "alert",
+            "alert-success", "border", "rounded-3", "p-2"], null,
+        [
+            removeButton,
+            createElement("p", `${amount}x ${product.name} toegevoegd aan je winkelmand`, ["lead", "mt-3"])
+        ]
+    )
+    removeButton.addEventListener("click", () => fadeOut(productBanner))
+
+    setTimeout(() => {
+        fadeOut(productBanner)
+    }, 3500)
+
+    container.appendChild(productBanner)
+    fadeIn(productBanner)
+    fadeOut(document.getElementById(`productamount-${product.name}`), true)
 }
