@@ -1,0 +1,13 @@
+
+
+.color-invert{
+    filter: invert(100%);
+}
+
+.animate-height-change{
+    transition: max-height 0.3s ease-out;
+}
+
+.object-cover {
+    object-fit: cover;
+}

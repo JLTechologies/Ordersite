@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cocktails - Tjok</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+            integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+            integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+            crossorigin="anonymous"></script>
+
+    <script src="https://kit.fontawesome.com/6e9f44a530.js" crossorigin="anonymous"></script>
+
+
+    <script defer>
+        let order = JSON.parse(localStorage.getItem("order")) || {}
+        const products = [
+            {
+                id: 1,
+                name: "cola",
+                price: 2.00,
+                categoryid: 1
+            }, {
+                id: 2,
+                name: "fanta",
+                price: 2.00,
+                categoryid: 1
+            }, {
+                id: 3,
+                name: "sprite",
+                price: 2.00,
+                categoryid: 1
+            }, {
+                id: 4,
+                name: "ice tea",
+                price: 2.00,
+                categoryid: 1
+            }, {
+                id: 5,
+                name: "duvel",
+                price: 3.00,
+                categoryid: 2
+            }, {
+                id: 6,
+                name: "westmalle",
+                price: 3.00,
+                categoryid: 2
+            }, {
+                id: 7,
+                name: "Gouden Carolus",
+                price: 3.00,
+                categoryid: 2
+            }, {
+                id: 8,
+                name: "Sex on The beach",
+                price: 3.00,
+                categoryid: 3
+            }, {
+                id: 9,
+                name: "Mojito",
+                price: 3.00,
+                categoryid: 3,
+                description: "lekkeeeeuuur"
+            }, {
+                id: 10,
+                name: "Tequila Sunrise",
+                price: 3.00,
+                categoryid: 3
+            },
+        ]
+        const categories = [
+            {
+                name: "frisdrank",
+                id: 1
+            }, {
+                name: "bier",
+                id: 2
+            }, {
+                name: "cocktail",
+                id: 3
+            }
+        ]
+        const tables = [
+            {id: 1, number: 1},
+            {id: 2, number: 2},
+            {id: 3, number: 3},
+            {id: 4, number: 4},
+            {id: 5, number: 5},
+            {id: 6, number: 6},
+            {id: 7, number: 7}
+        ]
+
+        const processOrder = () => {
+            if (order.betaling && order.tableid && Number(order.tableid) && order.products?.[0]) {
+                //querry hier
+                console.log("submitting data")
+                const form = document.createElement("form")
+                form.method = "POST"
+                form.action = "/localhelp"
+                form.style.display = "hidden"
+                form.id = "submitForm"
+                let productIdInputs = []
+                order.products.forEach(obj => {
+                    for (let i = 0; i < obj.amount; i++) {
+                        const input = document.createElement("input")
+                        input.type = "number"
+                        input.value = obj.product.id
+                        input.name = "productIds"
+                        productIdInputs = [...productIdInputs, input]
+                    }
+                })
+                const betalingInput = document.createElement("input")
+                betalingInput.type = "text"
+                betalingInput.value = order.betaling
+                betalingInput.name = "betaling"
+
+                const tableInput = document.createElement("input")
+                tableInput.type = "number"
+                tableInput.name = "tableid"
+                tableInput.value = order.tableid
+
+                console.log("created form")
+
+                console.log(productIdInputs)
+                productIdInputs.forEach(idInput => form.appendChild(idInput))
+                form.appendChild(betalingInput)
+                form.appendChild(tableInput)
+
+                document.getElementById("productOverview").appendChild(form)
+                document.getElementById("submitForm").submit()
+                console.log(document.getElementById("submitForm"))
+                console.log("submitted form")
+                return
+            }
+            window.scrollTo(0, 0)
+            stoppingAlert()
+        }
+
+        const stoppingAlert = async () => {
+            const container = document.getElementById("productOverview")
+            container.prepend(createElement("div", null, ["alert", "alert-danger"], "alertOrder", [
+                createElement("p", "Niet alle gegevens zijn ingevuld", ["lead", "m-0"])
+            ]))
+            setTimeout(() => {
+                container.removeChild(document.getElementById("alertOrder"))
+            }, 5000)
+        }
+    </script>
+
+    <script src="js/helperFunctions.js" defer></script>
+    <script src="js/shoppingCart.js" defer></script>
+    <script src="js/productElements.js" defer></script>
+    <script src="js/offCanvasElements.js" defer></script>
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+
+<nav class="navbar navbar-light border shadow-sm d-sticky top-0">
+    <div class="container-fluid d-flex justify-content-between">
+        <button class="navbar-brand ms-4 col-2 btn btn-light bg-transparent p-0" onclick="renderHomePage()">
+            <img src="tjokLogoText.png" alt="brand Text" class="d-inline-block align-text-top img-fluid h-100">
+        </button>
+        <button class="btn bg-transparent position-relative me-3 p-1" id="cartIcon" onclick="renderOrderOverview()">
+            <i class="text-dark fas fa-shopping-cart position-relative fs-4 "></i>
+        </button>
+    </div>
+</nav>
+<a class="btn btn-light border shadow-sm border-end-0 float-end" data-bs-toggle="offcanvas" href="#offcanvasExample"
+   role="button"
+   aria-controls="offcanvasExample">
+    <i class="fas fa-chevron-left"></i>
+</a>
+
+<div class="container mt-5 mx-auto row d-flex justify-content-center" id="productOverview">
+    <!--product will be filled in here-->
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Categorieën</h5>
+        <button type="button" class="btn-close text-reset" id="closeOffcanvas" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+
+    </div>
+    <div class="offcanvas-body">
+        <div class="list-group" id="categoryField">
+            <!--categories will be filled in here-->
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
