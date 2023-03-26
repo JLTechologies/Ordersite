@@ -4,10 +4,32 @@
     filter: invert(100%);
 }
 
-.animate-height-change{
-    transition: max-height 0.3s ease-out;
-}
-
 .object-cover {
     object-fit: cover;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.rotate{
+    transition: all 0.3s ease-out;
+}
+
+.rotate-0 {
+    transform: rotate(0deg);
+    rotation: 0deg;
+}
+
+.rotate-180 {
+    transform: rotate(180deg);
+    rotation: 180deg;
 }
