@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="./favicon.jpg" type="image/x-icon">
     <?php
+        include ('./server.php');
         include ('./required.php');
-        session_start();
-		$_SESSION['message'] = '';
 		
 	include('./queries.php');
 	
@@ -33,6 +32,7 @@
 <div class="register-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
+    <?php include ('./errors.php'); ?>
     <a href="./login.php" class="h1"><?php echo $site;?></a>
     </div>
     <div class="card-body">
@@ -82,7 +82,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-primary btn-block" name="reg_user">Register</button>
           </div>
           <!-- /.col -->
         </div>

@@ -139,6 +139,106 @@
     <div class="content">
       <div class="container-fluid">
         <div class="row">
+          <form action="<?php $_SERVER['PHP_SELF'] ;?>" method="post">
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">Lid Toevoegen</h3>
+              </div>
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="naam" class="control-label">Naam</label>
+                  <div>
+                    <input type="text" autocomplete="off" name="naam" placeholder="Naam" class="form-control" required/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="voornaam" class="control-label">Voornaam</label>
+                  <div>
+                    <input type="text" autocomplete="off" name="voornaam" placeholder="Voornaam" class="form-control" required/>
+                  </div>
+                </div>
+								<div class="form-group">
+                  <label for="geboortedatum" class="control-label">Geboortedatum</label>
+                  <div>
+                    <input type="date" autocomplete="off" name="geboortedatum" placeholder="Geboortedatum" class="form-control" required/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="control-label">Email/GSM</label>
+                  <div>
+                    <input type="text" autocomplete="off" name="email" placeholder="Email/GSM" class="form-control" required/>
+                  </div>
+                </div>
+								<div class="form-group">
+                  <label for="straat" class="control-label">Straat</label>
+                  <div>
+                    <input type="text" autocomplete="off" name="straat" placeholder="Straat" class="form-control" required/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="huisnummer" class="control-label">Huisnummer en Busnummer</label>
+                  <div>
+                    <input type="text" autocomplete="off" name="huisnummer" placeholder="Huisnummer en busnummer" class="form-control" required/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="postcode" class="control-label">Postcode</label>
+                  <div>
+                    <input type="text" autocomplete="off" name="postcode" placeholder="Postcode" class="form-control" required/>
+                  </div>
+                </div>
+								<div class="form-group">
+                  <label for="gemeente" class="control-label">Gemeente</label>
+                  <div>
+                    <input type="text" autocomplete="off" name="gemeente" placeholder="Gemeente" class="form-control" required/>
+                  </div>
+                </div>
+								<div class="form-group">
+                  <label for="paswoord" class="control-label">Paswoord</label>
+                  <div>
+                    <input type="password" autocomplete="off" name="paswoord" placeholder="Paswoord" class="form-control"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="paswoord2" class="control-label">Verifiëer paswoord</label>
+                    <div>
+                      <input type="password" autocomplete="off" name="paswoord2" placeholder="Verifiëer paswoord" class="form-control" required/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="indienst" class="control-label">Actief op tapavond?</label>
+                  <div>
+                    <select name="indienst" class="form-control" required/>
+											<option value="true">Ja</option>
+											<option value="false">Nee</option>
+										</select>
+                  </div>
+                </div>
+                <div class="form-group">
+                 	<label for="functie" class="control-label">Functie</label>
+                  <div>
+                    <select name="functie" class="form-control">
+                      <?php
+                        $afdeling = 'SELECT * FROM groups';
+                        $afdelingen = mysqli_query($conn, $afdeling);
+
+                        if(! $afdelingen) {
+                          die('Kon geen groepen inladen: '. mysqli_error($conn));
+                        }
+                        while($row = mysqli_fetch_assoc($afdelingen)) {
+                      ?>
+                        <option value="<?php echo $row['idgroups']; ?>"><?php echo $row['groupsname']; ?></option>
+                      <?php   }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="box-footer">
+  								<button type="submit" class="btn btn-success btn-sm">Maak gebruiker aan</button>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -154,6 +254,33 @@
   </footer>
 </div>
 <!-- ./wrapper -->
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if($_POST['paswoord'] == $_POST['paswoord2']) {
+        $naam = $conn->real_escape_string($_POST['naam']);
+        $voornaam = $conn->real_escape_string($_POST['voornaam']);
+        $geboortdatum = $conn->real_escape_string($_POST['geboortedatum']);
+		$email = $conn->real_escape_string($_POST['email']);
+		
+		$paswoord = $conn->password_hash($_POST['paswoord']);	
+        $functie = $conn->real_escape_string($_POST['functie']);
+		
+        $adduser = "INSERT INTO users (naam, voornaam, groupid, paswoord, email, straat, huisnummer, postcode, gemeente, indienst, geboortedatum)"
+            . "VALUES ('$naam', '$voornaam', '$functie', '$paswoord', '$email', '$straat', '$huisnummer', '$postcode', '$gemeente', '$indienst', '$geboortedatum')";
+		}
+
+        if ($conn->query($adduser) === true) {
+            $_SESSION['message'] = "$naam $voornaam is gemaakt.";
+            header("location: ./index.php");
+        }
+        else {
+            $_SESSION['message'] = "Gebruiker kon niet worden toegevoegd";
+        }
+        mysqli_close($conn);
+    }
+
+?>
 
 <!-- REQUIRED SCRIPTS -->
 
