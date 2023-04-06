@@ -139,6 +139,56 @@
     <div class="content">
       <div class="container-fluid">
         <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Users</h3>
+                <div class="card-tools">
+                  <a href="./add.php"><button type="button" class="btn btn-sm fa-pull-right btn-primary">Create User</button></a>
+                </div>
+              </div>
+              <div class="card-body table resposive p-0">
+                <table id="users" class="table table-hover table-striped">
+                  <thead>
+                    <tr>                      
+                      <th>First Name</th>
+					            <th>Last Name</th>
+	          				  <th>Email</th>
+                      <th>Phone</th>
+                      <th>Group</t>
+          					  <th>Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                      $users = "SELECT * FROM users INNER JOIN groups on users.groupid = groups.groupid";
+                      $getusers = mysqli_query($conn, $users);
+
+                      if(! $getusers) {
+                        die('Could not fetch data: '.mysqli_error($conn));
+                      }
+
+                      while($row = mysqli_fetch_assoc($getusers)) {
+                    ?>
+                    <tr class="align-middle">
+                      <td class="text-center"><?php echo htmlspecialchars($row['first_name']);?></td>
+                      <td class="text-center"><?php echo htmlspecialchars($row['last_name']);?></td>
+                      <td class="text-center"><?php echo htmlspecialchars($row['email']);?></td>
+                      <td class="text-center"><?php echo htmlspecialchars($row['phone']);?></td>
+                      <td class="text-center"><?php echo htmlspecialchars($row['groupname']);?></td>								
+						          <td>
+							          <form name="id" action="edit.php" method="get">
+								          <input type="hidden" name="id" value="<?php echo htmlspecialchars($row['userid']);?>"/>
+								          <input type="submit" value="edit table"/>
+							          </form>
+						          </td>
+                    </tr>
+                    <?php };?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>  
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
