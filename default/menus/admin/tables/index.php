@@ -27,28 +27,28 @@
   <!-- Theme style -->
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
 </head>
+
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
-
+  <div class="wrapper">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-    </ul>
+      <ul class="navbar-nav">
+       <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+       </li>
+      </ul>
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
-      <li class="nav-item">
-        <a class="nav-link" href="../">
-          <i class="fas fa-th-large"></i>
-        </a>
-      </li>
-    </ul>
-  </nav>
+        <li class="nav-item">
+          <a class="nav-link" href="../">
+            <i class="fas fa-th-large"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
@@ -61,7 +61,6 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-accordion="false">
@@ -137,14 +136,14 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-      <div class="row">
+        <div class="row">
           <div class="col-12">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Tables</h3>
-				  <div class="card-tools">
-				  	<a href="./add.php"><button type="button" class="btn btn-sm fa-pull-right btn-primary">Create Table</button></a>
-				  </div>
+				        <div class="card-tools">
+				  	      <a href="./add.php"><button type="button" class="btn btn-sm fa-pull-right btn-primary">Create Table</button></a>
+				        </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
@@ -152,42 +151,43 @@
                   <thead>
                     <tr>
                       <th>Table</th>
-					  <th>Number</th>
-					  <th>Description</th>
-					  <th>Edit</th>
+					            <th>Number</th>
+	          				  <th>Description</th>
+          					  <th>Edit</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
-					 $tables = "SELECT * FROM tables";					 
-					 $gettables = mysqli_query($conn, $tables);
+					             $tables = "SELECT * FROM tables";					 
+					             $gettables = mysqli_query($conn, $tables);
 					  
-					 if(! $gettables) {
-						 die('Could not fetch data: '.mysqli_error($conn));
-					 }
+				            	 if(! $gettables) {
+						             die('Could not fetch data: '.mysqli_error($conn));
+					             }
 					 
-					 while($row = mysqli_fetch_assoc($gettables)) {
-						 ?>
-					  <tr class="align-middle">
-					  	<td class="text-center"><?php echo htmlspecialchars($row['tableid']);?></td>
-                        <td class="text-center"><?php echo htmlspecialchars($row['number']);?></td>
-                        <td class="text-center"><?php echo htmlspecialchars($row['description']);?></td>								
-						<td>
-							<form name="id" action="edit.php" method="get">
-								<input type="hidden" name="id" value="<?php echo htmlspecialchars($row['tableid']);?>"/>
-								<input type="submit" value="edit table"/>
-							</form>
-						</td>
-					  </tr>
-					 <?php };?>
+					            while($row = mysqli_fetch_assoc($gettables)) {
+						        ?>
+					          <tr class="align-middle">
+					  	        <td class="text-center"><?php echo htmlspecialchars($row['tableid']);?></td>
+                      <td class="text-center"><?php echo htmlspecialchars($row['number']);?></td>
+                      <td class="text-center"><?php echo htmlspecialchars($row['description']);?></td>								
+						          <td>
+							          <form name="id" action="edit.php" method="get">
+								          <input type="hidden" name="id" value="<?php echo htmlspecialchars($row['tableid']);?>"/>
+								          <input type="submit" value="edit table"/>
+							          </form>
+						          </td>
+					          </tr>
+					          <?php };?>
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
             </div>
+          </div>
         </div>
-        </div>
-            <!-- /.card -->
+        <!-- /.card -->
+      </div>
     </div>
     <!-- /.content -->
   </div>

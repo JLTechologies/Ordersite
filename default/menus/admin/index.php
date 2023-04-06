@@ -7,7 +7,16 @@
     <?php
         include ('./required.php');
         session_start();
-		$_SESSION['message'] = '';
+        
+        if (!isset($_SESSION['username'])) {
+          $_SESSION['msg'] = "You must log in first";
+          header('location: ./login.php');
+        }
+        if (isset($_GET['logout'])) {
+          session_destroy();
+          unset($_SESSION['username']);
+          header("location: ./login.php");
+        }
 		
 	include('./queries.php');
 	
@@ -108,6 +117,16 @@
 				</p>
 			</a>
 			</li>
+      <?php if (isset($_SESSION['username'])): ?>
+      <li class="nav-item">
+			<a href="./index.php?logout='1'" class="nav-link">
+				<i class="nav-icon fas fa-th"></i>
+				<p>
+					Logout
+				</p>
+			</a>
+			</li>
+      <?php endif ?>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -139,6 +158,17 @@
     <div class="content">
       <div class="container-fluid">
         <div class="row">
+          <!-- notification message -->
+  	<?php if (isset($_SESSION['success'])) : ?>
+      <div class="error success" >
+      	<h3>
+          <?php 
+          	echo $_SESSION['success']; 
+          	unset($_SESSION['success']);
+          ?>
+      	</h3>
+      </div>
+  	<?php endif ?>
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
