@@ -8,13 +8,14 @@
         include ('./required.php');
         session_start();
         
-        if (!isset($_SESSION['username'])) {
+        if (!isset($_SESSION['email'])) {
           $_SESSION['msg'] = "You must log in first";
           header('location: ./login.php');
         }
         if (isset($_GET['logout'])) {
           session_destroy();
-          unset($_SESSION['username']);
+          unset($_SESSION['email']);
+          unset($_SESSION['success']);
           header("location: ./login.php");
         }
 		
@@ -117,7 +118,7 @@
 				</p>
 			</a>
 			</li>
-      <?php if (isset($_SESSION['username'])): ?>
+      <?php if (isset($_SESSION['email'])): ?>
       <li class="nav-item">
 			<a href="./index.php?logout='1'" class="nav-link">
 				<i class="nav-icon fas fa-th"></i>
@@ -163,8 +164,7 @@
       <div class="error success" >
       	<h3>
           <?php 
-          	echo $_SESSION['success']; 
-          	unset($_SESSION['success']);
+          	echo $_SESSION['success'];
           ?>
       	</h3>
       </div>

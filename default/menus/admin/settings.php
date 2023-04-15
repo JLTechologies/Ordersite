@@ -107,6 +107,16 @@
 				</p>
 			</a>
 			</li>
+      <?php if (isset($_SESSION['email'])): ?>
+      <li class="nav-item">
+			<a href="./index.php?logout='1'" class="nav-link">
+				<i class="nav-icon fas fa-th"></i>
+				<p>
+					Logout
+				</p>
+			</a>
+			</li>
+      <?php endif ?>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

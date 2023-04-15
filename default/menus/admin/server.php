@@ -7,7 +7,7 @@ $email    = "";
 $errors = array(); 
 
 // connect to the database
-$db = mysqli_connect('', '', '', 'orders');
+$db = mysqli_connect('remote.jl-tech.be', 'tjok', 'VTIkontich.05', 'orders');
 
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
@@ -55,7 +55,7 @@ if (isset($_POST['reg_user'])) {
   			  VALUES('$firstname', '$lastname', '$email', '$password', '$phone', '$groupid')";
   	mysqli_query($db, $query);
   	$_SESSION['success'] = "You are now registered";
-  	header('location: index.php');
+  	header('location: ./login.php');
   }
 }
 
@@ -74,17 +74,22 @@ if (isset($_POST['login_user'])) {
     }
   
     if (count($errors) == 0) {
-        $password = password_hash($password);
-        $query = "SELECT * FROM users WHERE email='$email' OR phone='$phone' AND password='$password'";
+        $hashed_password = md5($password);
+        $query = "SELECT * FROM users WHERE email='$email' AND password='$hashed_password'";
         $results = mysqli_query($db, $query);
         if (mysqli_num_rows($results) == 1) {
-          $_SESSION['email'] = $email || $phone;
-          $_SESSION['success'] = "You are now logged in";
-          header('location: index.php');
+          $_SESSION['email'] = $email;
+          $_SESSION['success'] = "Welcome $email.";
+          header('location: ./index.php');
         }else {
             array_push($errors, "Wrong email or phone/password combination");
         }
     }
+  }
+
+  //RESET PASSWORD
+  if (isset($_POST['reset_password'])) {
+  
   }
   
   ?>
