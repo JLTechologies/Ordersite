@@ -3,34 +3,13 @@
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="shortcut icon" href="../favicon.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="./favicon.jpg" type="image/x-icon">
     <?php
         include ('../required.php');
         session_start();
 		$_SESSION['message'] = '';
-        
-    if (!isset($_SESSION['email'])) {
-      $_SESSION['msg'] = "You must log in first";
-      header('location: ./login.php');
-    }
-    if (isset($_GET['logout'])) {
-      session_destroy();
-      unset($_SESSION['email']);
-      unset($_SESSION['success']);
-      header("location: ./login.php");
-    }
-		
-	include('../queries.php');
-	
-	$name = mysqli_query($conn, $sitename);
-	if (! $name) {
-		die('Kon site naam niet inladen: '.mysqli_error($conn));
-	}
-	while($row = mysqli_fetch_assoc($name)) {?>
-		<title>Admin | <?php $site = htmlspecialchars($row['sitename']); echo $site ;?></title>
-	<?php }
-	?>
-
+    ?>
+    <title>Cocktail | Admin</title>
 
   <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -66,9 +45,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../index.php" class="brand-link">
-      <img src="../logo.jpg" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light"><?php echo $site; ?></span>
+    <a href="./index.php" class="brand-link">
+      <img src="./logo.jpg" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Cocktail JH Tjok</span>
     </a>
 
     <!-- Sidebar -->
@@ -88,7 +67,7 @@
             </a>
           </li>
 		  <li class="nav-item">
-            <a href="./" class="nav-link active">
+            <a href="../orders/" class="nav-link">
               <i class="nav-icon fas fa-users-cog"></i>
               <p>
                 Orders
@@ -104,21 +83,13 @@
             </a>
           </li>
 		  <li class="nav-item">
-			<a href="../settings.php" class="nav-link">
-				<i class="nav-icon fas fa-th"></i>
-				<p>
-					Settings
-				</p>
-			</a>
-			</li>
-			<li class="nav-item">
-			<a href="../users/" class="nav-link">
-				<i class="nav-icon fas fa-th"></i>
-				<p>
-					Users
-				</p>
-			</a>
-			</li>
+            <a href="./" class="nav-link active">
+              <i class="nav-icon fas fa-truck-loading"></i>
+              <p>
+                Categories
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -138,7 +109,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="./">Admin</a></li>
-              <li class="breadcrumb-item active">Orders</li>
+              <li class="breadcrumb-item active">Categories</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -149,35 +120,7 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-      <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Orders</h3>
-				  <div class="card-tools">
-				  </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table id="articles" class="table table-hover table-striped">
-                  <thead>
-                    <tr>
-                      <th>Order</th>
-					  <th>Table</th>
-                      <th>Payment</th>
-                      <th>details</th>
-                      <th>total</th>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
+        <div class="row">
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -189,7 +132,7 @@
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- Default to the left -->
-	<?php include('../footer.php'); ?>
+	<?php include('./footer.php'); ?>
   </footer>
 </div>
 <!-- ./wrapper -->
@@ -197,17 +140,10 @@
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="../plugins/jquery/jquery.min.js"></script>
-<script>
-    $(document).ready(function(){  
-        setInterval(function(){   
-            $("tbody").load("data.php");
-        }, 250);
-    });
-    </script>
+<script src="./plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../dist/js/adminlte.min.js"></script>
+<script src="./dist/js/adminlte.min.js"></script>
 </body>
 </html>

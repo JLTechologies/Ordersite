@@ -56,7 +56,7 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Change password</button>
+            <button type="submit" class="btn btn-primary btn-block" name="reset_password">Change password</button>
           </div>
           <!-- /.col -->
         </div>

@@ -37,6 +37,14 @@
       <a href="./login.php" class="h1"><?php echo $site;?></a>
     </div>
     <div class="card-body">
+      <?php if (isset($_SESSION['success'])) : ?>
+      <p class="login-box-msg">
+        <?php 
+            echo $_SSESSION['success']; 
+            unset($_SSESSION['success']);
+        ?>
+      </p>
+      <?php endif ?>
       <p class="login-box-msg">Sign in to start your session</p>
 
       <form action="./login.php" method="post">
