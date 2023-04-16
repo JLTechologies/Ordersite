@@ -69,87 +69,122 @@
         {
             id: 1,
             name: "Cola",
-            price: 2.0,
+            price: 5.0,
             categoryid: 1
         }, {
             id: 2,
             name: "Cola Zero",
-            price: 2.0,
+            price: 5.0,
             categoryid: 1
         }, {
             id: 3,
             name: "Plat water",
-            price: 2.0,
+            price: 4.0,
             categoryid: 1
         }, {
             id: 4,
             name: "Bruiswater",
-            price: 2.0,
+            price: 4.0,
             categoryid: 1
         }, {
             id: 5,
             name: "Ice Tea",
-            price: 2.0,
+            price: 5.0,
             categoryid: 1
         }, {
             id: 5,
             name: "Fanta",
-            price: 2.0,
+            price: 5.0,
             categoryid: 1
         }, {
             id: 6,
             name: "Jupiler",
-            price: 2.0,
+            price: 5.0,
             categoryid: 2
         }, {
             id: 7,
             name: "Jupiler 0,0%",
-            price: 2.0,
+            price: 5.0,
             categoryid: 2
         }, {
             id: 8,
             name: "Grimbergen Double",
-            price: 4.50,
+            price: 9.00,
             categoryid: 2,
         }, {
             id: 9,
             name: "Fruitsap",
-            price: 2.0,
+            price: 5.0,
             categoryid: 1,
         }, {
             id: 10,
             name: "Duvel",
-            price: 4.50,
+            price: 9.0,
             categoryid: 2
         }, {
             id: 11,
             name: "Cava (Codorniu)",
-            price: 2.50,
+            price: 9.0,
             categoryid: 2
         }, {
             id: 12,
             name: "Cava (Codorniu 0%)",
-            price: 2.50,
+            price: 9.00,
             categoryid: 2
         }, {
             id: 13,
             name: "Koffie",
-            price: 1.50,
+            price: 4.00,
             categoryid: 1
         }, {
             id: 14,
-            name: "Soep",
-            price: 0.50,
+            name: "Sandwich Hesp",
+            price: 3.00,
             categoryid: 3
         }, {
             id: 15,
-            name: "Taart",
-            price: 2.00,
+            name: "Sandwich Hesp met Boter",
+            price: 3.00,
             categoryid: 3
         }, {
             id: 16,
-            name: "Party Snacks",
+            name: "Sanwich Kaas",
             price: 3.00,
+            categoryid: 3
+        }, {
+            id: 16,
+            name: "Sanwich Kaas met Boter",
+            price: 3.00,
+            categoryid: 3
+        }, {
+            id: 16,
+            name: "Sanwich Kaas & Hesp",
+            price: 4.00,
+            categoryid: 3
+        }, {
+            id: 16,
+            name: "Sanwich Kaas & Hesp met Boter",
+            price: 4.00,
+            categoryid: 3
+        }, {
+            id: 16,
+            name: "Churros 3st.",
+            price: 3.00,
+            categoryid: 3
+        }, {
+            id: 16,
+            name: "Churros 3st. met Bloemsuiker",
+            price: 3.00,
+            categoryid: 3
+        }, {
+            id: 16,
+            name: "Churros 6st.",
+            price: 6.00,
+            categoryid: 3
+        }, {
+            id: 16,
+            name: "Churros 6st. met Bloemsuiker",
+            price: 6.00,
             categoryid: 3
         },
     ]
