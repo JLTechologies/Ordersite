@@ -96,47 +96,50 @@
             name: "Fanta",
             price: 5.0,
             categoryid: 1
-        }, {
-            id: 6,
-            name: "Jupiler",
-            price: 5.0,
-            categoryid: 2
-        }, {
-            id: 7,
-            name: "Jupiler 0,0%",
-            price: 5.0,
-            categoryid: 2
-        }, {
-            id: 8,
-            name: "Grimbergen Double",
-            price: 9.00,
-            categoryid: 2,
-        }, {
+        }, 
+//        {
+//            id: 6,
+//            name: "Jupiler",
+//            price: 5.0,
+//            categoryid: 2
+//        }, {
+//            id: 7,
+//            name: "Jupiler 0,0%",
+//            price: 5.0,
+//            categoryid: 2
+//        }, {
+//            id: 8,
+//            name: "Grimbergen Double",
+//            price: 9.00,
+//            categoryid: 2,
+        //}, 
+        {
             id: 9,
             name: "Fruitsap",
             price: 5.0,
             categoryid: 1,
-        }, {
-            id: 10,
-            name: "Duvel",
-            price: 9.0,
-            categoryid: 2
-        }, {
-            id: 11,
-            name: "Cava (Codorniu)",
-            price: 9.0,
-            categoryid: 2
-        }, {
-            id: 12,
-            name: "Cava (Codorniu 0%)",
-            price: 9.00,
-            categoryid: 2
-        }, {
-            id: 13,
-            name: "Koffie",
-            price: 4.00,
-            categoryid: 1
-        }, {
+        },// {
+            //id: 10,
+            //name: "Duvel",
+            //price: 9.0,
+            //categoryid: 2
+        //}, {
+            //id: 11,
+            //name: "Cava (Codorniu)",
+            //price: 9.0,
+            //categoryid: 2
+        //}, {
+          //  id: 12,
+            //name: "Cava (Codorniu 0%)",
+        //    price: 9.00,
+          //  categoryid: 2
+        //}, {
+        //    id: 13,
+        //    name: "Koffie",
+        //    price: 4.00,
+        //    categoryid: 1
+        //},
+        {
             id: 14,
             name: "Sandwich Hesp",
             price: 3.00,
@@ -192,10 +195,11 @@
         {
             name: "Frisdrank",
             id: 1
-        }, {
-            name: "Bieren",
-            id: 2
-        }, {
+        }, //{
+            //name: "Bieren",
+            //id: 2
+        //}, 
+        {
             name: "Snacks",
             id: 3
         }
