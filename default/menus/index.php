@@ -3,6 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>BAAS - Vrolijk Toneel Initiatief</title>
+    <?php
+    include ('./admin/required.php');
+    session_start();
+    $active = "SELECT * FROM settings";
+    $getactive = mysqli_query($conn, $active);
+    if (!$getactive) {
+        die('Kon status niet laden vanuit de database: '.mysqli_error($conn));
+    }
+    while($row = mysqli_fetch_assoc($getactive)) {
+        $status = htmlspecialchars($row['active']);
+    }
+    if ($status === 'false') {
+        header("location: ./404/404.php");
+    }
+
+    ?>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -96,50 +112,47 @@
             name: "Fanta",
             price: 5.0,
             categoryid: 1
-        }, 
-//        {
-//            id: 6,
-//            name: "Jupiler",
-//            price: 5.0,
-//            categoryid: 2
-//        }, {
-//            id: 7,
-//            name: "Jupiler 0,0%",
-//            price: 5.0,
-//            categoryid: 2
-//        }, {
-//            id: 8,
-//            name: "Grimbergen Double",
-//            price: 9.00,
-//            categoryid: 2,
-        //}, 
-        {
+        }, {
+            id: 6,
+            name: "Jupiler",
+            price: 5.0,
+            categoryid: 2
+        }, {
+            id: 7,
+            name: "Jupiler 0,0%",
+            price: 5.0,
+            categoryid: 2
+        }, {
+            id: 8,
+            name: "Grimbergen Double",
+            price: 9.00,
+            categoryid: 2,
+        }, {
             id: 9,
             name: "Fruitsap",
             price: 5.0,
             categoryid: 1,
-        },// {
-            //id: 10,
-            //name: "Duvel",
-            //price: 9.0,
-            //categoryid: 2
-        //}, {
-            //id: 11,
-            //name: "Cava (Codorniu)",
-            //price: 9.0,
-            //categoryid: 2
-        //}, {
-          //  id: 12,
-            //name: "Cava (Codorniu 0%)",
-        //    price: 9.00,
-          //  categoryid: 2
-        //}, {
-        //    id: 13,
-        //    name: "Koffie",
-        //    price: 4.00,
-        //    categoryid: 1
-        //},
-        {
+        }, {
+            id: 10,
+            name: "Duvel",
+            price: 9.0,
+            categoryid: 2
+        }, {
+            id: 11,
+            name: "Cava",
+            price: 9.0,
+            categoryid: 2
+        }, {
+            id: 12,
+            name: "Cava 0%",
+            price: 9.00,
+            categoryid: 2
+        }, {
+            id: 13,
+            name: "Koffie",
+            price: 4.00,
+            categoryid: 1
+        }, {
             id: 14,
             name: "Sandwich Hesp",
             price: 3.00,
@@ -155,37 +168,37 @@
             price: 3.00,
             categoryid: 3
         }, {
-            id: 16,
+            id: 17,
             name: "Sanwich Kaas met Boter",
             price: 3.00,
             categoryid: 3
         }, {
-            id: 16,
+            id: 18,
             name: "Sanwich Kaas & Hesp",
             price: 4.00,
             categoryid: 3
         }, {
-            id: 16,
+            id: 19,
             name: "Sanwich Kaas & Hesp met Boter",
             price: 4.00,
             categoryid: 3
         }, {
-            id: 16,
+            id: 20,
             name: "Churros 3st.",
             price: 3.00,
             categoryid: 3
         }, {
-            id: 16,
+            id: 21,
             name: "Churros 3st. met Bloemsuiker",
             price: 3.00,
             categoryid: 3
         }, {
-            id: 16,
+            id: 22,
             name: "Churros 6st.",
             price: 6.00,
             categoryid: 3
         }, {
-            id: 16,
+            id: 23,
             name: "Churros 6st. met Bloemsuiker",
             price: 6.00,
             categoryid: 3
@@ -195,11 +208,10 @@
         {
             name: "Frisdrank",
             id: 1
-        }, //{
-            //name: "Bieren",
-            //id: 2
-        //}, 
-        {
+        }, {
+            name: "Bieren",
+            id: 2
+        }, {
             name: "Snacks",
             id: 3
         }

@@ -34,7 +34,7 @@ const renderHomePage = () => {
         }
         container.appendChild(createElement("div", null, ["container"], "homepageField",
             [
-                createElement("h1", "Welkom bij het Vrolijk Toneel Initiatief!",
+                createElement("h1", "Welkom bij het Vrolijk Toneel Initiatief!, de bestelling dat u nu plaatst is enkel voor tijdens de pauze!",
                     ["mb-3", "display-6", "text-center"]),
                 createElement("img", null, ["object-cover", "w-100", "h-auto"],
                     null, null, [
