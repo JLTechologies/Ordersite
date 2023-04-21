@@ -64,7 +64,7 @@ const createProductField = (product, amount, hasOnclick) => {
             createElement("div", null, ["d-flex", "justify-content-between", "align-items-baseline", "flex-nowrap"], null, [
                 createElement("p", `${amount}x ${product.name}`, ["lead", "fw-normal", "me-5", "my-0"]),
                 createElement("div", null, ["d-flex", "justify-content-end", "flex-nowrap", "align-items-baseline"], null, [
-                    createElement("p", `€${Number(product.price * amount).toFixed(2)}`, ["lead", "ms-5", "my-0", "fs-6"]),
+                    createElement("p", `${Number(product.price * amount).toFixed(2)} Bonnen`, ["lead", "ms-5", "my-0", "fs-6"]),
                     createElement("i", null, ["fas", 'fa-chevron-down', "ms-2", "rotate", "rotate-0"], `chevron-${product.name}`)
                 ])
             ])
@@ -73,7 +73,7 @@ const createProductField = (product, amount, hasOnclick) => {
         children = [
             createElement("div", null, ["d-flex", "justify-content-between", "align-items-baseline", "flex-nowrap"], null, [
                 createElement("p", `${amount}x ${product.name}`, ["lead", "fw-normal", "me-5", "my-0"]),
-                createElement("p", `€${Number(product.price * amount).toFixed(2)}`, ["lead", "ms-5", "my-0", "fs-6"])
+                createElement("p", `${Number(product.price * amount).toFixed(2)} Bon(nen)`, ["lead", "ms-5", "my-0", "fs-6"])
             ])
         ]
     }
@@ -196,7 +196,7 @@ const updateOverviewField = (product, amount) => {
         createElement("div", null, ["d-flex", "justify-content-between", "align-items-baseline", "flex-nowrap"], null, [
             createElement("p", `${amount}x ${product.name}`, ["lead", "fw-normal", "me-5", "my-0"]),
             createElement("div", null, ["d-flex", "justify-content-end", "flex-nowrap", "align-items-baseline"], null, [
-                createElement("p", `€${Number(product.price * amount).toFixed(2)}`, ["lead", "ms-5", "my-0", "fs-6"]),
+                createElement("p", `${Number(product.price * amount).toFixed(2)} Bonnen`, ["lead", "ms-5", "my-0", "fs-6"]),
                 createElement("i", null, ["fas", 'fa-chevron-down', "ms-2", "rotate", "rotate-180"], `chevron-${product.name}`)
             ])
         ])
@@ -215,7 +215,7 @@ const updatePrice = () => {
     order.products.forEach(obj => totalPrice += (obj.product.price * obj.amount))
 
     price.appendChild(createElement("p", "totaal", ["lead"]))
-    price.appendChild(createElement("p", `€${totalPrice.toFixed(2)}`, ["lead"], ["totaal"]))
+    price.appendChild(createElement("p", `${totalPrice.toFixed(2)} Bonnen`, ["lead"], ["totaal"]))
 
 }
 
@@ -244,34 +244,24 @@ const createTotal = (targetOrder) => {
     targetOrder.products.forEach(obj => totalPrice += (obj.product.price * obj.amount))
     return createElement("div", null, ["container", "d-flex", "justify-content-between", "p-3"], "totalPrice", [
         createElement("p", "totaal", ["lead"]),
-        createElement("p", `€${totalPrice.toFixed(2)}`, ["lead"], ["totaal"])
+        createElement("p", `${totalPrice.toFixed(2)} Bon(nen)`, ["lead"], ["totaal"])
     ])
 }
 
 const createPaymentMethod = () => {
-    const cashSelected = order.betaling === "Cash" || false
-    const payconiqSelected = order.betaling === "Payconiq" || false
+    const cashSelected = order.betaling === "Bonnen" || false
     const cashInput = createElement("input", null, ["form-check-input"], "paymentCash", null,
         [{name: "type", value: "radio"}, {name: "name", value: "payment"}])
-    cashInput.onclick = () => setPayment("Cash")
+    cashInput.onclick = () => setPayment("Bonnen")
     if (cashSelected) cashInput.checked = true
-    const payconiqInput = createElement("input", null, ["form-check-input"], "paymentPayconiq", null,
-        [{name: "type", value: "radio"}, {name: "name", value: "payment"}])
-    payconiqInput.onclick = () => setPayment("Payconiq")
-    if (payconiqSelected) payconiqInput.checked = true
     return createElement("div", null, ["container", "mx-auto", "d-flex", "flex-column", "mt-3"],
         "paymentContainer",
         [
             createElement("h1", "Betalingswijze", ["display-6"]),
             createElement("div", null, ["form-check"], null, [
                 cashInput,
-                createElement("label", "Cash", ["form-check-label"], null, null,
+                createElement("label", "Bonnen", ["form-check-label"], null, null,
                     [{name: "for", value: "paymentCash"}])
-            ]),
-            createElement("div", null, ["form-check"], null, [
-                payconiqInput,
-                createElement("label", "Payconiq", ["form-check-label"], null, null,
-                    [{name: "for", value: "paymentPayconiq"}])
             ])
         ])
 }

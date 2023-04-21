@@ -38,7 +38,7 @@ const createProductEl = (product) => {
         createElement("div", null, ["d-flex", "justify-content-between", "align-items-baseline", "flex-nowrap"], null, [
             createElement("p", product.name, ["lead", "fw-normal", "me-5", "my-0"]),
             createElement("div", null, ["d-flex", "justify-content-end", "flex-nowrap", "align-items-baseline"], null, [
-                createElement("p", `€${Number(product.price).toFixed(2)}`, ["lead", "ms-5", "my-0", "fs-6"]),
+                createElement("p", `${Number(product.price).toFixed(2)} Bon(nen)`, ["lead", "ms-5", "my-0", "fs-6"]),
                 createElement("i", null, ["fas", 'fa-chevron-down', "ms-2", "rotate", "rotate-0"], `chevron-${product.name}`)
             ])
         ])
