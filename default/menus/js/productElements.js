@@ -11,7 +11,7 @@ const renderProductOverview = (id) => {
 }
 
 const createLoadingIcon = () => {
-    const attributes = [{name: "role", value: "status"}]
+    const attributes = [{ name: "role", value: "status" }]
 
     return createElement("div", null, ["spinner-border", "text-primary", "text-center"],
         null,
@@ -27,7 +27,7 @@ const createProductList = async (id) => {
             ["display-6", "text-center", "fw-normal", "mb-3"])])
 
     categoryProducts.forEach(product => {
-        productContainer.appendChild(createProductEl(product))
+        productContainer.appendChild(createProductEl(structuredClone(product)))
     })
     return productContainer
 }
@@ -74,13 +74,34 @@ const createProductSubEl = async (product, el) => {
     const container = createElement("div", null,
         ["container", "px-2", "my-2"],
         `productamount-${product.name}`, [
-            createAmountField(product),
-            createAddToOrderButton(product)
-        ])
+        createExtraOptionsList(product),
+        createAmountField(product),
+        createAddToOrderButton(product)
+    ])
     el.appendChild(container)
     fadeIn(container, true)
 }
 
+const createExtraOptionsList = (product) => {
+    const options = Object.keys(product).filter(key => key.includes("option_"));
+
+    console.log(options);
+
+    const optionElements = [];
+    options.forEach(option => {
+        const name = option.split("_")[1]
+        let attributes = [{ name: "type", value: "checkbox" }]
+        product[option] && attributes.push({ name: "checked" })
+        let checkbox = createElement("input", null, ["btn-check", "mx-2"], name, null, attributes)
+        checkbox.onclick = () => product[option] = !product[option]
+        let label = createElement("label", name, ["btn", "btn-outline-primary"], null, null, [{ name: "for", value: name }])
+        optionElements.push(checkbox, label)
+    })
+
+    const optionContainer = createElement("div", null, ["btn-group", "p-2"], product.id, optionElements, [{ name: "role", value: "group" }])
+
+    return optionContainer
+}
 
 const createAmountField = (product) => {
 
@@ -94,7 +115,7 @@ const createAmountField = (product) => {
 
     const amountEl = createElement("input", null, ["form-control", "mx-3", "w-25", "text-center"],
         `amount-${product.name}`, null,
-        [{name: "type", value: "number"}])
+        [{ name: "type", value: "number" }])
     amountEl.value = 1
     amountContainer.appendChild(amountEl)
 
@@ -147,11 +168,11 @@ const addProductToOrder = (product) => {
     let products = order.products?.filter(obj => obj.product.id !== product.id) || []
 
     productAddedBanner(product, amount).then(() => {
-            const productAmount = order?.products?.find(obj => Number(obj.product.id) === Number(product.id))?.amount + amount || amount
-            order.products = [...products, {product: {...product}, amount: productAmount}]
-            localStorage.setItem("order", JSON.stringify(order))
-            updateCart()
-        }
+        const productAmount = order?.products?.find(obj => Number(obj.product.id) === Number(product.id))?.amount + amount || amount
+        order.products = [...products, { product: { ...product }, amount: productAmount }]
+        localStorage.setItem("order", JSON.stringify(order))
+        updateCart()
+    }
     )
 }
 
@@ -161,7 +182,7 @@ const productAddedBanner = async (product, amount) => {
 
     const removeButton = createElement("button", null, ["btn-close", "float-end"])
     const productBanner = createElement("div", null, ["position-fixed", "bottom-0", "my-3", "w-75", "alert",
-            "alert-success", "border", "rounded-3", "p-2"], null,
+        "alert-success", "border", "rounded-3", "p-2"], null,
         [
             removeButton,
             createElement("p", `${amount}x ${product.name} toegevoegd aan je winkelmand`, ["lead", "mt-3"])
