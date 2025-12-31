@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mijn Stem - Vrolijk Toneel Initiatief</title>
+    <title>Vrolijk Toneel Initiatief</title>
     <?php
-    include ('./admin2/required.php');
+    include ('./admin/required.php');
     session_start();
     $active = "SELECT * FROM settings";
     $getactive = mysqli_query($conn, $active);
@@ -85,171 +85,125 @@
         {
             id: 1,
             name: "Cola",
-            price: 4.0,
+            price: 5.0,
             categoryid: 1
         }, {
             id: 2,
             name: "Cola Zero",
-            price: 4.0,
+            price: 5.0,
             categoryid: 1
         }, {
             id: 3,
             name: "Plat water",
-            price: 4.0,
+            price: 5.0,
             categoryid: 1
         }, {
             id: 4,
             name: "Bruiswater",
-            price: 4.0,
+            price: 5.0,
             categoryid: 1
         }, {
             id: 5,
             name: "Ice Tea",
-            price: 4.0,
-            categoryid: 1
-        }, {
-            id: 5,
-            name: "Fanta",
-            price: 4.0,
+            price: 5.0,
             categoryid: 1
         }, {
             id: 6,
+            name: "Fanta",
+            price: 5.0,
+            categoryid: 1
+        }, {
+            id: 7,
             name: "Maes",
             price: 5.0,
             categoryid: 2
         }, {
-            id: 7,
+            id: 8,
             name: "Maes 0,0%",
             price: 5.0,
             categoryid: 2
         }, {
-            id: 8,
+            id: 9,
             name: "Grimbergen Double",
             price: 9.00,
             categoryid: 2,
         }, {
-            id: 9,
+            id: 10,
             name: "Fruitsap",
-            price: 4.0,
+            price: 5.0,
             categoryid: 1,
         }, {
-            id: 10,
+            id: 11,
             name: "Duvel",
             price: 9.0,
             categoryid: 2
         }, {
-            id: 11,
+            id: 12,
             name: "Cava",
             price: 9.0,
             categoryid: 2
         }, {
-            id: 12,
+            id: 13,
             name: "Cava 0%",
             price: 9.00,
             categoryid: 2
         }, {
-            id: 13,
+            id: 14,
             name: "Koffie",
             price: 4.00,
-            categoryid: 2
-        }, {
-            id: 14,
-            name: "Hamburger met Samoerai",
-            description: "Hamburger met samoerai saus, kaas, tomaat, wortelen, salade en augurk",
-            price: 6.00,
-            option_kaas: true,
-            option_augurk: true,
-            option_wortelen: true,
-            option_salade: true,
-            option_augurk: true,
-            categoryid: 3
+            categoryid: 4
         }, {
             id: 15,
-            name: "Hamburger met Ketchup",
-            description: "Hamburger met ketchup, kaas, tomaat, wortelen, salade en augurk",
-            price: 6.00,
-            option_kaas: true,
-            option_augurk: true,
-            option_wortelen: true,
-            option_salade: true,
-            option_augurk: true,
+            name: "Hotdog",
+            description: "Basis Hotdog",
+            price: 5.00,
             categoryid: 3
         }, {
             id: 16,
-            name: "Hamburger met Mayonaise",
-            description: "Hamburger met mayonaise, kaas, tomaat, wortelen, salade en augurk",
-            price: 6.00,
-            option_kaas: true,
-            option_augurk: true,
-            option_wortelen: true,
-            option_salade: true,
-            option_augurk: true,
+            name: "Hotdog Halal",
+            description: "Basis Hotdog (halal)",
+            price: 5.00,
             categoryid: 3
         }, {
             id: 17,
-            name: "Cheeseburger",
-            price: 6.00,
-            option_kaas: true,
-            option_augurk: true,
-            option_wortelen: true,
-            option_salade: true,
-            option_augurk: true,
-            categoryid: 3
-        }, {
-            id: 18,
-            name: "Mijn-Stem Burger",
-            description: "Hamburger met Mijn-Stem saus, kaas, tomaat, wortelen, salade, droge ajuin en augurk",
-            price: 6.00,
-            option_kaas: true,
-            option_augurk: true,
-            option_wortelen: true,
-            option_salade: true,
-            option_augurk: true,
-            option_drogeajuin: true,
-            categoryid: 3
-        }, {
-            id: 19,
-            name: "Groentenburger",
-            description: "Groentenburger met kaas, tomaat, wortelen, salade en augurk",
-            price: 6.00,
-            option_kaas: true,
-            option_augurk: true,
-            option_wortelen: true,
-            option_salade: true,
-            option_augurk: true,
-            categoryid: 3
-        }, {
-            id: 20,
-            name: "Koekskes",
-            price: 3.00,
-            categoryid: 3
-        }, {
-            id: 21,
             name: "Witte Wijn",
             price: 8.00,
             categoryid: 2
         }, {
-            id: 22,
+            id: 18,
             name: "Rode Wijn",
             price: 8.00,
             categoryid: 2
-        }, {
+        }, /*{
             id: 23,
             name: "Koffie Deca",
             price: 4.00,
-            categoryid: 2
-        },
+            categoryid: 4
+        },*/ {
+            id: 19,
+            name: "Thee",
+            price: 4.00,
+            categoryid: 4
+        },/* {
+            id: 29,
+            name: "Jerre special (dubbele cheese zondergroenten, geen saus)",
+            price: 8.00,
+            categoryid: 3
+        },*/
     ]
     const categories = [
         {
             name: "Frisdrank",
             id: 1
-        },/* {
+        }, {
             name: "Bieren",
             id: 2
-        },*/ {
+        }, {
             name: "Snacks",
             id: 3
+        }, {
+            name:"Koffie & Thee",
+            id: 4
         }
     ]
     const tables = [
@@ -282,7 +236,8 @@
         {id: 27, number: 27},
     	{id: 28, number: 28},
         {id: 29, number: 29},
-    	{id: 30, number: 30}
+    	{id: 30, number: 30}/*,
+        {id: 31, number: 31}*/
     ]
 
     const processOrder = () => {

@@ -10,6 +10,17 @@
         include ('../admin/required.php');
         session_start();
 		$_SESSION['message'] = '';
+        $active = "SELECT * FROM settings";
+    $getactive = mysqli_query($conn, $active);
+    if (!$getactive) {
+        die('Kon status niet laden vanuit de database: '.mysqli_error($conn));
+    }
+    while($row = mysqli_fetch_assoc($getactive)) {
+        $status = htmlspecialchars($row['active']);
+    }
+    if ($status === 'true') {
+        header("location: ../index.php");
+    }
 		
 	include('../admin/queries.php');
 	

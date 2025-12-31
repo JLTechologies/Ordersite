@@ -1,7 +1,7 @@
                     <?php
                     
         include ('../required.php');
-					 $orders = "SELECT * FROM orders INNER JOIN tables on orders.tableid = tables.tableid";					 
+					 $orders = "SELECT * FROM orders INNER JOIN tables on orders.tableid = tables.tableid WHERE orders.status = 'in progress'";					 
 					 $getorders = mysqli_query($conn, $orders);
 					  
 					 if(! $getorders) {
