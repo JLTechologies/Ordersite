@@ -1,8 +1,8 @@
 <?php
 $host = "127.0.0.1";
-$user = "pterodactyl";
-$password = "VTIkontich.05";
-$database = "order";
+$user = "";
+$password = "";
+$database = "";
 
 $conn = new mysqli($host, $user, $password, $database);
 
