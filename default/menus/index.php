@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BAAS - Vrolijk Toneel Initiatief</title>
+    <title>Mijn Stem - Vrolijk Toneel Initiatief</title>
     <?php
-    include ('./admin/required.php');
+    include ('./admin2/required.php');
     session_start();
     $active = "SELECT * FROM settings";
     $getactive = mysqli_query($conn, $active);
@@ -85,12 +85,12 @@
         {
             id: 1,
             name: "Cola",
-            price: 5.0,
+            price: 4.0,
             categoryid: 1
         }, {
             id: 2,
             name: "Cola Zero",
-            price: 5.0,
+            price: 4.0,
             categoryid: 1
         }, {
             id: 3,
@@ -105,21 +105,21 @@
         }, {
             id: 5,
             name: "Ice Tea",
-            price: 5.0,
+            price: 4.0,
             categoryid: 1
         }, {
             id: 5,
             name: "Fanta",
-            price: 5.0,
+            price: 4.0,
             categoryid: 1
         }, {
             id: 6,
-            name: "Jupiler",
+            name: "Maes",
             price: 5.0,
             categoryid: 2
         }, {
             id: 7,
-            name: "Jupiler 0,0%",
+            name: "Maes 0,0%",
             price: 5.0,
             categoryid: 2
         }, {
@@ -130,7 +130,7 @@
         }, {
             id: 9,
             name: "Fruitsap",
-            price: 5.0,
+            price: 4.0,
             categoryid: 1,
         }, {
             id: 10,
@@ -151,67 +151,103 @@
             id: 13,
             name: "Koffie",
             price: 4.00,
-            categoryid: 1
+            categoryid: 2
         }, {
             id: 14,
-            name: "Sandwich Hesp",
-            price: 3.00,
+            name: "Hamburger met Samoerai",
+            description: "Hamburger met samoerai saus, kaas, tomaat, wortelen, salade en augurk",
+            price: 6.00,
+            option_kaas: true,
+            option_augurk: true,
+            option_wortelen: true,
+            option_salade: true,
+            option_augurk: true,
             categoryid: 3
         }, {
             id: 15,
-            name: "Sandwich Hesp met Boter",
-            price: 3.00,
+            name: "Hamburger met Ketchup",
+            description: "Hamburger met ketchup, kaas, tomaat, wortelen, salade en augurk",
+            price: 6.00,
+            option_kaas: true,
+            option_augurk: true,
+            option_wortelen: true,
+            option_salade: true,
+            option_augurk: true,
             categoryid: 3
         }, {
             id: 16,
-            name: "Sanwich Kaas",
-            price: 3.00,
+            name: "Hamburger met Mayonaise",
+            description: "Hamburger met mayonaise, kaas, tomaat, wortelen, salade en augurk",
+            price: 6.00,
+            option_kaas: true,
+            option_augurk: true,
+            option_wortelen: true,
+            option_salade: true,
+            option_augurk: true,
             categoryid: 3
         }, {
             id: 17,
-            name: "Sanwich Kaas met Boter",
-            price: 3.00,
+            name: "Cheeseburger",
+            price: 6.00,
+            option_kaas: true,
+            option_augurk: true,
+            option_wortelen: true,
+            option_salade: true,
+            option_augurk: true,
             categoryid: 3
         }, {
             id: 18,
-            name: "Sanwich Kaas & Hesp",
-            price: 4.00,
+            name: "Mijn-Stem Burger",
+            description: "Hamburger met Mijn-Stem saus, kaas, tomaat, wortelen, salade, droge ajuin en augurk",
+            price: 6.00,
+            option_kaas: true,
+            option_augurk: true,
+            option_wortelen: true,
+            option_salade: true,
+            option_augurk: true,
+            option_drogeajuin: true,
             categoryid: 3
         }, {
             id: 19,
-            name: "Sanwich Kaas & Hesp met Boter",
-            price: 4.00,
+            name: "Groentenburger",
+            description: "Groentenburger met kaas, tomaat, wortelen, salade en augurk",
+            price: 6.00,
+            option_kaas: true,
+            option_augurk: true,
+            option_wortelen: true,
+            option_salade: true,
+            option_augurk: true,
             categoryid: 3
         }, {
             id: 20,
-            name: "Churros 3st.",
+            name: "Koekskes",
             price: 3.00,
             categoryid: 3
         }, {
             id: 21,
-            name: "Churros 3st. met Bloemsuiker",
-            price: 3.00,
-            categoryid: 3
+            name: "Witte Wijn",
+            price: 8.00,
+            categoryid: 2
         }, {
             id: 22,
-            name: "Churros 6st.",
-            price: 6.00,
-            categoryid: 3
+            name: "Rode Wijn",
+            price: 8.00,
+            categoryid: 2
         }, {
             id: 23,
-            name: "Churros 6st. met Bloemsuiker",
-            price: 6.00,
-            categoryid: 3
+            name: "Koffie Deca",
+            price: 4.00,
+            categoryid: 2
         },
     ]
     const categories = [
         {
             name: "Frisdrank",
             id: 1
-        }, {
+        },/* {
             name: "Bieren",
             id: 2
-        }, {
+        },*/ {
             name: "Snacks",
             id: 3
         }
@@ -246,9 +282,7 @@
         {id: 27, number: 27},
     	{id: 28, number: 28},
         {id: 29, number: 29},
-    	{id: 30, number: 30},
-        {id: 31, number: 31},
-    	{id: 32, number: 32}
+    	{id: 30, number: 30}
     ]
 
     const processOrder = () => {
